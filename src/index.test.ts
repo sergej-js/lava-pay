@@ -41,4 +41,10 @@ describe('LavaPay', () => {
 
         expect(response.status).toEqual(200);
     })
+
+    test('Get shop balance', async () => {
+        const balance = await lava.getShopBalance();
+
+        expect(balance.data!.balance).toEqual(0)
+    })
 });

@@ -75,7 +75,7 @@ export class LavaPay {
 	 *
 	 * @return {Promise<IBaseResponse<IGetInvoiceStatusResponse>>} The response of get invoice status.
 	 */
-	public async getAvailableTariffs() {
+	public async getAvailableTariffs(): Promise<IBaseResponse<IGetAvailableTariffs[] | IGetAvailableTariffs>> {
 		return this.request<IBaseResponse<IGetAvailableTariffs[] | IGetAvailableTariffs>>(
 			HttpMethod.POST,
 			'invoice/get-available-tariffs',

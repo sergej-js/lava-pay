@@ -1,16 +1,19 @@
 import { createHmac } from 'crypto';
-import { HttpMethod, Type } from './types';
+import { HttpMethod, ICreateInvoice, Type } from './types';
 import axios from 'axios';
 import { LavaError } from './errors';
 
 export class LavaPay {
-	constructor(private readonly secretKey: string) {}
+	constructor(
+		private readonly secretKey: string,
+		private readonly shopId: string,
+	) {}
 
 	private getSignature(body: Record<string, any>) {
 		return createHmac('sha256', this.secretKey).update(JSON.stringify(body)).digest('hex');
 	}
 
-	public async request<T>(method: HttpMethod, type: Type, route: any, body: Record<string, any>): Promise<T> {
+	public async request<T>(method: HttpMethod, route: string, body: Record<string, any>): Promise<T> {
 		try {
 			const { data } = await axios.request({
 				method,
@@ -28,5 +31,9 @@ export class LavaPay {
 		} catch (error) {
 			throw new LavaError(JSON.stringify(error.response.data, undefined, 4));
 		}
+	}
+
+	public async createInvoice(options: ICreateInvoice) {
+		return this.request<ICreateInvoice>(HttpMethod.POST, 'invoice/create', options);
 	}
 }

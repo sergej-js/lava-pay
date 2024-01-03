@@ -12,6 +12,19 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sergej-js/lava-pay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sergej-js/lava-pay/issues"
+  },
+  "homepage": "https://github.com/sergej-js/lava-pay#readme",
+  "keywords": [
+    "lava",
+    "api",
+    "payment"
+  ],
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/node": "^20.8.9",

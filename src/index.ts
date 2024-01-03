@@ -8,7 +8,7 @@ import {
 	IGetInvoiceStatusRequest,
 	IGetInvoiceStatusResponse,
 } from './types';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { LavaError } from './errors';
 
 export class LavaPay {
@@ -31,7 +31,7 @@ export class LavaPay {
 	 */
 	public async request<T>(method: HttpMethod, route: string, body: Record<string, any>): Promise<T> {
 		try {
-			body = body.push({ shopId: this.shopId });
+			body.shopId = this.shopId;
 			const { data } = await axios.request({
 				method,
 				url: `https://api.lava.ru/business/${route}`,
@@ -46,7 +46,9 @@ export class LavaPay {
 
 			return <T>data;
 		} catch (error) {
-			throw new LavaError(JSON.stringify(error.response.data, undefined, 4));
+			if (error instanceof AxiosError) {
+				throw new LavaError(JSON.stringify(error.response.data, undefined, 4));
+			}
 		}
 	}
 

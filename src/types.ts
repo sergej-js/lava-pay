@@ -7,7 +7,7 @@ export enum HttpMethod {
 }
 
 export interface IBaseResponse<T> {
-	data: T | T[] | null;
+	data: T | null;
 	error?: any;
 	status: number;
 	status_check: boolean;
@@ -16,7 +16,6 @@ export interface IBaseResponse<T> {
 export interface ICreateInvoiceRequest {
 	sum: string;
 	orderId: string | number;
-	shopId: string;
 	hookUrl?: string;
 	failUrl?: string;
 	successUrl?: string;
@@ -43,9 +42,8 @@ export interface ICreateInvoiceResponse {
 }
 
 export interface IGetInvoiceStatusRequest {
-	shopId: string;
-	orderId: string | number;
-	invoiceId: string;
+	orderId?: string | number;
+	invoiceId?: string;
 }
 
 export interface IGetInvoiceStatusResponse {

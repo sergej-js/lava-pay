@@ -15,6 +15,7 @@ export class LavaPay {
 
 	public async request<T>(method: HttpMethod, route: string, body: Record<string, any>): Promise<T> {
 		try {
+			body = body.push({ shopId: this.shopId });
 			const { data } = await axios.request({
 				method,
 				url: `https://api.lava.ru/business/${route}`,
@@ -39,5 +40,9 @@ export class LavaPay {
 
 	public async getInvoiveStatus(options: IGetInvoiceStatus) {
 		return this.request<IGetInvoiceStatus>(HttpMethod.POST, 'invoice/status', options);
+	}
+
+	public async getAvailableTariffs() {
+		return this.request(HttpMethod.POST, 'invoice/get-available-tariffs', {});
 	}
 }

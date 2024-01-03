@@ -8,9 +8,9 @@ export enum HttpMethod {
 
 export interface IBaseResponse<T> {
 	data: T | null;
-	error?: any;
 	status: number;
-	status_check: boolean;
+	error?: any;
+	status_check?: boolean;
 }
 
 export interface ICreateInvoiceRequest {
@@ -68,4 +68,9 @@ export interface IGetAvailableTariffs {
 	service_name: string;
 	service_id: string;
 	status: number;
+}
+
+export interface IGetShopBalance {
+	balance: string;
+	freeze_balance: string;
 }

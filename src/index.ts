@@ -7,6 +7,7 @@ import {
 	IGetAvailableTariffs,
 	IGetInvoiceStatusRequest,
 	IGetInvoiceStatusResponse,
+	IGetShopBalance,
 } from './types';
 import axios, { AxiosError } from 'axios';
 import { LavaError } from './errors';
@@ -15,7 +16,7 @@ export class LavaPay {
 	constructor(
 		private readonly secretKey: string,
 		private readonly shopId: string,
-	) {}
+	) { }
 
 	private getSignature(body: Record<string, any>) {
 		return createHmac('sha256', this.secretKey).update(JSON.stringify(body)).digest('hex');
@@ -83,5 +84,14 @@ export class LavaPay {
 			'invoice/get-available-tariffs',
 			{},
 		);
+	}
+
+	/**
+	 * Returns shop balance
+	 *
+	 * @return {Promise<IBaseResponse<IGetShopBalance>>} The response of get shop balance.
+	 */
+	public async getShopBalance(): Promise<IBaseResponse<IGetShopBalance>> {
+		return this.request<IBaseResponse<IGetShopBalance>>(HttpMethod.POST, 'shop/get-balance', {})
 	}
 }

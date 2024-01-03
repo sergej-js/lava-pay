@@ -17,3 +17,9 @@ export interface ICreateInvoice {
 	customFields?: string;
 	comment?: string;
 }
+
+export interface IGetInvoiceStatus {
+	shopId: string;
+	orderId: string | number;
+	invoiceId: string;
+}

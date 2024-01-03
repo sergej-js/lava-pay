@@ -1,5 +1,5 @@
 import { createHmac } from 'crypto';
-import { HttpMethod, ICreateInvoice, Type } from './types';
+import { HttpMethod, ICreateInvoice, IGetInvoiceStatus } from './types';
 import axios from 'axios';
 import { LavaError } from './errors';
 
@@ -35,5 +35,9 @@ export class LavaPay {
 
 	public async createInvoice(options: ICreateInvoice) {
 		return this.request<ICreateInvoice>(HttpMethod.POST, 'invoice/create', options);
+	}
+
+	public async getInvoiveStatus(options: IGetInvoiceStatus) {
+		return this.request<IGetInvoiceStatus>(HttpMethod.POST, 'invoice/status', options);
 	}
 }

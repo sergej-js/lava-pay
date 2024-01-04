@@ -1,3 +1,11 @@
+export interface ILavaPay {
+	request: <T>(method: HttpMethod, route: string, body: Record<string, any>) => Promise<T>;
+	createInvoice: (options: ICreateInvoiceRequest) => Promise<IBaseResponse<ICreateInvoiceResponse>>;
+	getInvoiveStatus: (options: IGetInvoiceStatusRequest) => Promise<IBaseResponse<IGetInvoiceStatusResponse>>;
+	getAvailableTariffs: () => Promise<IBaseResponse<IGetAvailableTariffs | IGetAvailableTariffs[]>>;
+	getShopBalance: () => Promise<IBaseResponse<IGetShopBalance>>;
+}
+
 export enum HttpMethod {
 	GET = 'GET',
 	POST = 'POST',

@@ -8,11 +8,12 @@ import {
 	IGetInvoiceStatusRequest,
 	IGetInvoiceStatusResponse,
 	IGetShopBalance,
+	ILavaPay,
 } from './types';
 import axios, { AxiosError } from 'axios';
 import { LavaError } from './errors';
 
-export class LavaPay {
+export class LavaPay implements ILavaPay {
 	constructor(
 		private readonly secretKey: string,
 		private readonly shopId: string,
@@ -27,7 +28,7 @@ export class LavaPay {
 	 *
 	 * @param {HttpMethod} method - The HTTP method to use for the request.
 	 * @param {string} route - The route to send the request to.
-	 * @param {Record<string, any>} data - The data to include in the request.
+	 * @param {Record<string, any>} body - The body to include in the request.
 	 * @return {Promise<T>} - A promise that resolves with the response data.
 	 */
 	public async request<T>(method: HttpMethod, route: string, body: Record<string, any>): Promise<T> {

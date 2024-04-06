@@ -13,7 +13,7 @@ import { v4 as uuid } from "uuid";
 async function main() {
     const lava = new LavaApi("secreyKey", "shopId");
 
-    const invoice = lava.createInvoice({
+    const invoice = await lava.createInvoice({
         amount: "100",
         order_id: uuid(),
     })
